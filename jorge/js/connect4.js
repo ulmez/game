@@ -120,8 +120,8 @@ function count(x, y, player) {
         };
     horizontal = countLeft(x - 1, y, player) + countRight(x + 1, y, player) + 1;
     vertical = countDown(x, y + 1, player) + 1;
-    diagonal1 = countUpLeft(x - 1, y - 1, player) + countDownRight(x + 1, y + 1) + 1;
-    diagonal2 = countUpRight(x + 1, y - 1, player) + countDownLeft(x - 1, y + 1) + 1;
+    diagonal1 = countUpLeft(x - 1, y - 1, player) + countDownRight(x + 1, y + 1, player) + 1;
+    diagonal2 = countUpRight(x + 1, y - 1, player) + countDownLeft(x - 1, y + 1, player) + 1;
     return Math.max(horizontal, vertical, diagonal1, diagonal2);
 }
 //Initialition of array
@@ -130,8 +130,11 @@ while (true) {
     //print the board
     printBoard();
     //ask player where
-    player_text = player1 ? "Player 1(" + PLAYER_1 + ")" : "Player 2(" + PLAYER_1 + ")";
-    x = prompt(player_text + " vilket nummer. Skriv 'exit' för att sluta);
+    player_text = player1 ? "Player 1(" + PLAYER_1 + ")" : "Player 2(" + PLAYER_2 + ")";
+    x = prompt(player_text + " vilket nummer. Skriv 'exit' för att sluta");
+    if ((x === 'exit')) {
+        break;
+    }
     if (!isNaN(x)) {
         x = Number(x) - 1;
         if (x >= 0 && x < X_CORD) {
@@ -140,12 +143,8 @@ while (true) {
                 result = count(x, y, player1 ? PLAYER_1 : PLAYER_2);
                 if (result >= 4) {
                     printBoard();
-                    console.log("
-        GRATTIS " + player_text + "
-        har vunnit !! !! !! !");
-                    alert("
-        GRATTIS " + player_text + "
-        har vunnit !! !! !! !");
+                    console.log('GRATTIS ' + player_text + 'har vunnit !! !! !! !');
+                    alert('GRATTIS ' + player_text + 'har vunnit !! !! !! !');
                     break;
                 }
                 player1 = !player1;

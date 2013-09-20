@@ -21,11 +21,16 @@ var X_CORD = 7,
 
 function slotChoice(x_pos, color) {
     "use strict";
-    for (i = board.length - 1; i >= 0; i = i - 1) {
-        if (board[i][x_pos][1] === "-") {
-            board[i][x_pos][1] = color;
-            break;
+    if (board[0][x_pos][1] === "-") {
+        for (i = board.length - 1; i >= 0; i = i - 1) {
+            if (board[i][x_pos][1] === "-") {
+                board[i][x_pos][1] = color;
+                //break;
+                return true;
+            }
         }
+    } else {
+        return false;
     }
 }
 var firh = function fourInRowHorizontalCheck() {
@@ -94,6 +99,119 @@ var firv = function fourInRowVerticalCheck() {
     //console.log("----------------");
     return false;
 };
+var firdf = function fourInRowDiagonalForwardCheck() {
+    "use strict";
+    //printOut = "";
+    for (i = 0; i < board.length; i = i + 1) {
+        for (j = 0; j < board[i].length; j = j + 1) {
+            counterR = 0;
+            counterB = 0;
+            //printOut += board[i][j][1] + " ";
+            if (board[i][j][1] !== "-" && i + 3 < board.length && j + 3 < board[i].length) {
+                //console.log(board[i][j][0]);
+                x = i;
+                for (k = j; k < j + 4; k = k + 1) {
+                    if (board[x][k][1] === "R") {
+                        //alert("hej");
+                        counterR = counterR + 1;
+                        counterB = 0;
+                        if (counterR === 4) {
+                            break;
+                        }
+                    } else if (board[x][k][1] === "B") {
+                        counterB = counterB + 1;
+                        counterR = 0;
+                        if (counterB === 4) {
+                            break;
+                        }
+                    } else {
+                        counterR = 0;
+                        counterB = 0;
+                    }
+                    //printOut += board[x][k][1] + " ";
+                    //printOut += k + " " + x + " " + counterR + "    ";
+                    x = x + 1;
+                    /*if (counterR === 4) {
+                        //alert("hej");
+                        break;
+                    }*/
+                }
+                //if (counterR === 4 || counterB === 4) {
+                break;
+                //}
+            }
+            //printOut += "\n";
+            if (counterR === 4 || counterB === 4) {
+                //alert("hej");
+                return true;
+            }
+        }
+        if (counterR === 4 || counterB === 4) {
+            return true;
+            //break;
+        }
+    }
+    //return printOut;
+    return false;
+};
+var firdb = function fourInRowDiagonalBackwardCheck() {
+    "use strict";
+    //printOut = "";
+    for (i = 0; i < board.length; i = i + 1) {
+        for (j = 0; j < board[i].length; j = j + 1) {
+            counterR = 0;
+            counterB = 0;
+            //printOut += board[i][j][1] + " ";
+            if (board[i][j][1] !== "-" && i + 3 < board.length && j - 3 >= 0) {
+                //console.log(board[i][j][0]);
+                x = i;
+                for (k = j; k > j - 4; k = k - 1) {
+                    if (board[x][k][1] === "R") {
+                        //alert("hej");
+                        counterR = counterR + 1;
+                        counterB = 0;
+                        //alert(counterR);
+                        if (counterR === 4) {
+                            break;
+                        }
+                    } else if (board[x][k][1] === "B") {
+                        counterB = counterB + 1;
+                        counterR = 0;
+                        if (counterB === 4) {
+                            break;
+                        }
+                    } else {
+                        counterR = 0;
+                        counterB = 0;
+                    }
+                    //alert("hej");
+                    //printOut += board[x][k][0] + " ";
+                    //printOut += k + " " + x + " " + counterR + "    ";
+                    x = x + 1;
+                    /*if (counterR === 4) {
+                        //alert("hej");
+                        break;
+                    }*/
+                }
+                if (counterR === 4 || counterB === 4) {
+                    break;
+                }
+            }
+            //printOut += "\n";
+            if (counterR === 4 || counterB === 4) {
+                //alert("hej");
+                return true;
+            }
+        }
+        if (counterR === 4 || counterB === 4) {
+            return true;
+            //break;
+        }
+    }
+    //return printOut;
+    return false;
+    //return printOut;
+};
 
 function boardToOneLine(arrPlayground) {
     "use strict";
@@ -161,27 +279,33 @@ var playground = function (printPos) {
     return printOut;
 };
 initPlayGame(7, 6);
-//slotChoice(0, "R");
-//slotChoice(1, "R");
-//slotChoice(2, "R");
-//slotChoice(3, "R");
-//slotChoice(4, "R");
-//slotChoice(5, "R");
-//slotChoice(6, "R");
-//slotChoice(0, "B");
-//slotChoice(1, "B");
-//slotChoice(2, "B");
-slotChoice(0, "R");
-slotChoice(0, "B");
-slotChoice(0, "R");
-slotChoice(0, "R");
-slotChoice(4, "B");
-slotChoice(5, "B");
-slotChoice(6, "B");
-slotChoice(3, "B");
+console.log(slotChoice(3, "B"));
+console.log(slotChoice(3, "B"));
+console.log(slotChoice(3, "B"));
+console.log(slotChoice(3, "B"));
+console.log(slotChoice(3, "B"));
+console.log(slotChoice(3, "B"));
+console.log(slotChoice(3, "B"));
+/*slotChoice(4, "R");
+slotChoice(5, "R");
+slotChoice(6, "R");
+slotChoice(3, "R");
+slotChoice(4, "R");
+slotChoice(5, "R");
+slotChoice(6, "R");
+slotChoice(3, "R");
+slotChoice(4, "R");
+slotChoice(5, "R");
+slotChoice(6, "R");
+slotChoice(3, "R");
+slotChoice(4, "R");
+slotChoice(5, "R");
+slotChoice(6, "R");*/
 console.log(playground(1));
-console.log(firh());
+/*console.log(firh());
 console.log(firv());
+console.log(firdf());
+console.log(firdb());*/
 ////orderBoardToVerticalCheck();
 //console.log(board.length);
 //console.log(board[6].length);

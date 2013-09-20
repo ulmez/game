@@ -38,33 +38,29 @@
         }
         return board;
     }
-    //print an array
-
-    function printBoard(board) {
-        var aux, i, j;
-        for (i = 0; i < board.length; i = i + 1) { //for every row
-            aux = "";
-            for (j = 0; j < board[i].length; j = j + 1) { //for every column
-                aux += getValue(j, i, board) + " "; //agrupate all the values of a row
-            }
-            console.log(aux);
-        }
-    }
-    //print the head of the board, numerics 1 2 3 4 5 acording the x_axis size
-
-    function printHead() {
-        var i,
-            aux = "",
-            num;
-        for (i = 0; i < X_CORD; i = i + 1) {
-            num = i + 1;
-            aux += num + " ";
-        }
-        console.log(aux);
-    }
     //print the numeric head + board
 
     function showBoard(board) {
+        var printHead = function () { //print the head of the board, numerics 1 2 3 4 5 acording the x_axis size
+            var i,
+                aux = "",
+                num;
+            for (i = 0; i < X_CORD; i = i + 1) {
+                num = i + 1;
+                aux += num + " ";
+            }
+            console.log(aux);
+        },
+            printBoard = function (board) { //print the board
+                var aux, i, j;
+                for (i = 0; i < board.length; i = i + 1) { //for every row
+                    aux = "";
+                    for (j = 0; j < board[i].length; j = j + 1) { //for every column
+                        aux += getValue(j, i, board) + " "; //agrupate all the values of a row
+                    }
+                    console.log(aux);
+                }
+            };
         console.clear();
         printHead();
         printBoard(board);

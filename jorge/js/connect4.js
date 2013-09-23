@@ -121,7 +121,7 @@
                     if (!inBoardLimits(x, y) || !isPlayerPiece(x, y, player, board)) {
                         return 0;
                     }
-                    return countToDirection.countDirection(moveX(x), moveY(y), player, board, moveX, moveY);
+                    return countToDirection.countDirection(moveX(x), moveY(y), player, board, moveX, moveY) + 1;
                 },
                 //axixMovements: object that have the compilation of movements of an individual axis
                 axisMovements: {

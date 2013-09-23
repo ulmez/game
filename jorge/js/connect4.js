@@ -65,19 +65,24 @@
         printHead();
         printBoard(board);
     }
-    //set a piece of the "player" in the board, in the column "pos", it returns y_coordinate or -1 if the board is full in that column
+    //get de player description
 
-    function setPiece(pos, player, board) {
-        var exit = false,
-            i = Y_CORD - 1;
-        while (i >= 0 && !exit) {
-            if (getValue(pos, i, board) === DEFAULT_CHAR) {
-                setValue(pos, i, player, board);
-                return i;
-            }
-            i = i - 1;
-        }
-        return -1;
+    function getPlayerDesc(isPlayer1) {
+        return isPlayer1 ? "Player 1(" + PLAYER_1 + ")" : "Player 2(" + PLAYER_2 + ")";
+    }
+    //ask with to a player, position where want to put a piece, or to write the exit word
+
+    function askPlayerPosition(isPlayer1) {
+        var player_text = getPlayerDesc(isPlayer1);
+        return prompt(player_text + " vilket nummer. Skriv '" + EXIT + "' för att sluta");
+    }
+
+    function isNumber(x) {
+        return !isNaN(x);
+    }
+
+    function getArrayPositionFromUserPosition(x) {
+        return Number(x) - 1;
     }
     //check if a x_coordenate is in the board limits
 
@@ -94,107 +99,24 @@
     function inBoardLimits(x, y) { //said if x, y are inside the limits of the mainBoard
         return inXBoardLimits(x) && inYBoardLimits(y);
     }
-    //count how many pieces in a row have the "player" with a piece put in x-y coordenates in a determined board
-    //it checks in horizontal, vertical and the two diagonals
-
-    function count(x, y, player, board) {
-        var horizontal, // number of pieces of same player in horizontal
-            vertical, //  number of pieces of same player in vertical
-            diagonal1, // number of pieces of same player in diagonal upLeft - downRight
-            diagonal2, // number of pieces of same player in diagonal upRight - downLeft
-            isPlayerPiece = function (x, y, player, board) { //said if a piece in a board is from the player that plays
-                return getValue(x, y, board) === player;
-            },
-            //countToDirection: object used as a compilation of functions that count pieces on a row
-            countToDirection = {
-                //countDirection: recursive function that count how many pieces in a row are in a determined axis movement
-                //x --> coordenate x (numeric)
-                //y --> coordenate y (numeric)
-                //player --> pieceId of a player
-                //board --> board
-                //moveX --> function to move coordenate x
-                //moveY --> function to move coordenate y
-                countDirection: function (x, y, player, board, moveX, moveY) {
-                    //first we continue the movement, change the value of x-y acording functions moveX, moveY
-                    x = moveX(x);
-                    y = moveY(y);
-                    if (!inBoardLimits(x, y) || !isPlayerPiece(x, y, player, board)) {
-                        return 0;
-                    }
-                    return countToDirection.countDirection(moveX(x), moveY(y), player, board, moveX, moveY) + 1;
-                },
-                //axixMovements: object that have the compilation of movements of an individual axis
-                axisMovements: {
-                    xLeft: function (x) { //function that calculate x_coordenate to move left
-                        return x - 1;
-                    },
-                    xRight: function (x) { //function that calculate x_coordenate to move right
-                        return x + 1;
-                    },
-                    notMove: function (z) { //function that calculate coordenate(x or y) to not move
-                        return z;
-                    },
-                    yDown: function (y) { //function that calculate y_coordenate to move down
-                        return y + 1;
-                    },
-                    yUp: function (y) { //function that calculate y_coordenate to move up
-                        return y - 1;
-                    }
-                },
-                //left: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the left
-                left: function (x, y, player, board) {
-                    return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xLeft, countToDirection.axisMovements.notMove);
-                },
-                //right: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the right
-                right: function (x, y, player, board) {
-                    return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.right, countToDirection.axisMovements.notMove);
-                },
-                //down: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the down
-                down: function (x, y, player, board) {
-                    return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.notMove, countToDirection.axisMovements.yDown);
-                },
-                //leftUp: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the diagonal left-up
-                leftUp: function (x, y, player, board) {
-                    return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xLeft, countToDirection.axisMovements.yUp);
-                },
-                //rightDown: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the diagonal right-Down
-                rightDown: function (x, y, player, board) {
-                    return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xRight, countToDirection.axisMovements.yDown);
-                },
-                //rightUp: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the diagonal right-Up
-                rightUp: function (x, y, player, board) {
-                    return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xRight, countToDirection.axisMovements.yUp);
-                },
-                //leftDown: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the diagonal Left-Down
-                leftDown: function (x, y, player, board) {
-                    return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xLeft, countToDirection.axisMovements.yDown);
-                }
-            };
-        //count how many pieces of the player are in left + right + 1; the one is the current place
-        horizontal = countToDirection.left(x, y, player, board) + countToDirection.right(x, y, player, board) + 1;
-        //count how many pieces of the player are down + 1; the one is the current place, never is going to be a piece over the curren so is not neccesary count up
-        vertical = countToDirection.down(x, y, player, board) + 1;
-        //count how many pieces of the player are in leftUp + rightDown + 1; the one is the current place
-        diagonal1 = countToDirection.leftUp(x, y, player, board) + countToDirection.rightDown(x, y, player, board) + 1;
-        //count how many pieces of the player are in rightUp + leftDown + 1; the one is the current place
-        diagonal2 = countToDirection.rightUp(x, y, player, board) + countToDirection.leftDown(x, y, player, board) + 1;
-        return Math.max(horizontal, vertical, diagonal1, diagonal2);
-    }
-    //get de player description
-
-    function getPlayerDesc(isPlayer1) {
-        return isPlayer1 ? "Player 1(" + PLAYER_1 + ")" : "Player 2(" + PLAYER_2 + ")";
-    }
-    //ask with to a player, position where want to put a piece, or to write the exit word
-
-    function askPlayerPosition(isPlayer1) {
-        var player_text = getPlayerDesc(isPlayer1);
-        return prompt(player_text + " vilket nummer. Skriv '" + EXIT + "' för att sluta");
-    }
     //get the internal piece_ID of the curren player
 
     function getPieceID(isPlayer1) {
         return isPlayer1 ? PLAYER_1 : PLAYER_2;
+    }
+    //set a piece of the "player" in the board, in the column "pos", it returns y_coordinate or -1 if the board is full in that column
+
+    function setPiece(pos, player, board) {
+        var exit = false,
+            i = Y_CORD - 1;
+        while (i >= 0 && !exit) {
+            if (getValue(pos, i, board) === DEFAULT_CHAR) {
+                setValue(pos, i, player, board);
+                return i;
+            }
+            i = i - 1;
+        }
+        return -1;
     }
     //say if the column where the player try to put a piece is full
 
@@ -204,6 +126,91 @@
     //say if the player have win with his last movement
 
     function isPlayerWin(x, y, piece, board) {
+        //count how many pieces in a row have the "player" with a piece put in x-y coordenates in a determined board
+        //it checks in horizontal, vertical and the two diagonals
+        var count = function (x, y, player, board) {
+            var horizontal, // number of pieces of same player in horizontal
+                vertical, //  number of pieces of same player in vertical
+                diagonal1, // number of pieces of same player in diagonal upLeft - downRight
+                diagonal2, // number of pieces of same player in diagonal upRight - downLeft
+                isPlayerPiece = function (x, y, player, board) { //said if a piece in a board is from the player that plays
+                    return getValue(x, y, board) === player;
+                },
+                //countToDirection: object used as a compilation of functions that count pieces on a row
+                countToDirection = {
+                    //countDirection: recursive function that count how many pieces in a row are in a determined axis movement
+                    //x --> coordenate x (numeric)
+                    //y --> coordenate y (numeric)
+                    //player --> pieceId of a player
+                    //board --> board
+                    //moveX --> function to move coordenate x
+                    //moveY --> function to move coordenate y
+                    countDirection: function (x, y, player, board, moveX, moveY) {
+                        //first we continue the movement, change the value of x-y acording functions moveX, moveY
+                        x = moveX(x);
+                        y = moveY(y);
+                        if (!inBoardLimits(x, y) || !isPlayerPiece(x, y, player, board)) {
+                            return 0;
+                        }
+                        return countToDirection.countDirection(x, y, player, board, moveX, moveY) + 1;
+                    },
+                    //axixMovements: object that have the compilation of movements of an individual axis
+                    axisMovements: {
+                        xLeft: function (x) { //function that calculate x_coordenate to move left
+                            return x - 1;
+                        },
+                        xRight: function (x) { //function that calculate x_coordenate to move right
+                            return x + 1;
+                        },
+                        notMove: function (z) { //function that calculate coordenate(x or y) to not move
+                            return z;
+                        },
+                        yDown: function (y) { //function that calculate y_coordenate to move down
+                            return y + 1;
+                        },
+                        yUp: function (y) { //function that calculate y_coordenate to move up
+                            return y - 1;
+                        }
+                    },
+                    //left: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the left
+                    left: function (x, y, player, board) {
+                        return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xLeft, countToDirection.axisMovements.notMove);
+                    },
+                    //right: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the right
+                    right: function (x, y, player, board) {
+                        return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xRight, countToDirection.axisMovements.notMove);
+                    },
+                    //down: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the down
+                    down: function (x, y, player, board) {
+                        return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.notMove, countToDirection.axisMovements.yDown);
+                    },
+                    //leftUp: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the diagonal left-up
+                    leftUp: function (x, y, player, board) {
+                        return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xLeft, countToDirection.axisMovements.yUp);
+                    },
+                    //rightDown: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the diagonal right-Down
+                    rightDown: function (x, y, player, board) {
+                        return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xRight, countToDirection.axisMovements.yDown);
+                    },
+                    //rightUp: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the diagonal right-Up
+                    rightUp: function (x, y, player, board) {
+                        return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xRight, countToDirection.axisMovements.yUp);
+                    },
+                    //leftDown: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the diagonal Left-Down
+                    leftDown: function (x, y, player, board) {
+                        return countToDirection.countDirection(x, y, player, board, countToDirection.axisMovements.xLeft, countToDirection.axisMovements.yDown);
+                    }
+                };
+            //count how many pieces of the player are in left + right + 1; the one is the current place
+            horizontal = countToDirection.left(x, y, player, board) + countToDirection.right(x, y, player, board) + 1;
+            //count how many pieces of the player are down + 1; the one is the current place, never is going to be a piece over the curren so is not neccesary count up
+            vertical = countToDirection.down(x, y, player, board) + 1;
+            //count how many pieces of the player are in leftUp + rightDown + 1; the one is the current place
+            diagonal1 = countToDirection.leftUp(x, y, player, board) + countToDirection.rightDown(x, y, player, board) + 1;
+            //count how many pieces of the player are in rightUp + leftDown + 1; the one is the current place
+            diagonal2 = countToDirection.rightUp(x, y, player, board) + countToDirection.leftDown(x, y, player, board) + 1;
+            return Math.max(horizontal, vertical, diagonal1, diagonal2);
+        };
         return count(x, y, piece, board) >= PIECES_IN_A_ROW_TO_WIN;
     }
     //write the winner msg
@@ -228,8 +235,8 @@
         if ((x === EXIT)) { //if user have write the exit word, its the end of the game
             break;
         }
-        if (!isNaN(x)) { //the user entry have to be a number, if its not, we ask again
-            x = Number(x) - 1; //We convert position to number and substract 1 because we use 0 as first position (user uses 1)
+        if (isNumber(x)) { //the user entry have to be a number, if its not, we ask again
+            x = getArrayPositionFromUserPosition(x); //We convert position to number and substract 1 because we use 0 as first position (user uses 1)
             if (inXBoardLimits(x)) { //if the user entry is not in the board limits, we ask again
                 piece = getPieceID(isPlayer1); //we obtain the app piece_id for the player, G --> gul and R --> röd
                 y = setPiece(x, piece, mainBoard); //set the piece in the board and obtain the "y" position

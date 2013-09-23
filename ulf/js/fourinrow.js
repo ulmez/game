@@ -17,6 +17,7 @@ var X_CORD = 7,
     slotR,
     slotB,
     checker,
+    design = "background: #000; color: #FFF; font-weight:bold; font-size: 5em",
     printOut = "";
 
 function slotChoice(x_pos, color) {
@@ -136,9 +137,9 @@ var firdf = function fourInRowDiagonalForwardCheck() {
                         break;
                     }*/
                 }
-                //if (counterR === 4 || counterB === 4) {
-                break;
-                //}
+                if (counterR === 4 || counterB === 4) {
+                    break;
+                }
             }
             //printOut += "\n";
             if (counterR === 4 || counterB === 4) {
@@ -213,6 +214,28 @@ var firdb = function fourInRowDiagonalBackwardCheck() {
     //return printOut;
 };
 
+function winningCheck() {
+    "use strict";
+    if (firh() || firv() || firdf() || firdb()) {
+        return true;
+    }
+    return false;
+}
+var draw = function drawCheck() {
+    "use strict";
+    counter = 0;
+    for (i = 0; i < X_CORD; i = i + 1) {
+        if (board[0][i][1] !== "-") {
+            counter = counter + 1;
+        }
+    }
+    //console.log(counter);
+    if (counter === 7 && !winningCheck()) {
+        return true;
+    }
+    return false;
+};
+
 function boardToOneLine(arrPlayground) {
     "use strict";
     //printOut = "";
@@ -268,8 +291,9 @@ function initPlayGame(x_val, y_val) {
 var playground = function (printPos) {
     "use strict";
     printOut = "";
-    printOut += "  1 2 3 4 5 6 7\n";
+    printOut += "%c   1 2 3 4 5 6 7 \n";
     for (i = 0; i < board.length; i = i + 1) {
+        printOut += " ";
         printOut += i + 1 + " ";
         for (j = 0; j < board[0].length; j = j + 1) {
             printOut += board[i][j][printPos] + " ";
@@ -278,14 +302,136 @@ var playground = function (printPos) {
     }
     return printOut;
 };
-initPlayGame(7, 6);
-console.log(slotChoice(3, "B"));
-console.log(slotChoice(3, "B"));
-console.log(slotChoice(3, "B"));
-console.log(slotChoice(3, "B"));
-console.log(slotChoice(3, "B"));
-console.log(slotChoice(3, "B"));
-console.log(slotChoice(3, "B"));
+var player = "R",
+    slot,
+    playYesNo = "";
+var playerTurn = function (p) {
+    "use strict";
+    slot = "";
+    while (isNaN(slot) || slot < 1 || slot > 7) {
+        if (p === "R") {
+            slot = prompt("Pick slot 1 - 7 red player");
+        } else {
+            slot = prompt("Pick slot 1 - 7 blue player");
+        }
+    }
+    slot = Number(slot) - 1;
+    if (board[0][slot][1] === "-") {
+        slotChoice(slot, p);
+        console.clear();
+        console.log(playground(1), design);
+        return true;
+    }
+    alert("This slot is full, take another one");
+    //if (winningCheck()) {
+    //    return p;
+    //}
+    return false;
+};
+while (playYesNo !== "y" && playYesNo !== "n") {
+    playYesNo = prompt("Do you want to play \"Four In Row?\"\n\"Y\" for YES, \"N\" for NO");
+    playYesNo = playYesNo.toLowerCase();
+}
+if (playYesNo === "y") {
+    initPlayGame(X_CORD, Y_CORD);
+    //Used for draw check-------------------
+    /*slotChoice(0, "R");
+    slotChoice(0, "R");
+    slotChoice(0, "R");
+    slotChoice(6, "B");
+    slotChoice(6, "R");
+    slotChoice(6, "B");
+    slotChoice(1, "R");
+    slotChoice(1, "R");
+    slotChoice(1, "R");
+    slotChoice(5, "B");
+    slotChoice(5, "B");
+    slotChoice(5, "R");
+    slotChoice(2, "B");
+    slotChoice(2, "B");
+    slotChoice(2, "B");
+    slotChoice(4, "R");
+    slotChoice(4, "B");
+    slotChoice(4, "R");
+    slotChoice(3, "R");
+    slotChoice(3, "R");
+    slotChoice(3, "R");
+    slotChoice(0, "B");
+    slotChoice(0, "B");
+    slotChoice(1, "B");
+    slotChoice(1, "B");
+    slotChoice(2, "R");
+    slotChoice(2, "R");
+    slotChoice(6, "R");
+    slotChoice(6, "R");
+    slotChoice(5, "B");
+    slotChoice(5, "R");
+    slotChoice(3, "B");
+    slotChoice(3, "B");
+    slotChoice(4, "B");
+    slotChoice(4, "B");
+    slotChoice(0, "R");
+    slotChoice(1, "R");
+    slotChoice(2, "B");
+    slotChoice(3, "R");
+    slotChoice(4, "R");
+    slotChoice(6, "R");*/
+    //--------------------------------------
+    console.log(playground(1), design);
+    while (!winningCheck() && !draw()) {
+        if (player === "R") {
+            if (playerTurn(player)) {
+                if (!winningCheck()) {
+                    player = "B";
+                }
+            }
+        } else if ((player === "B")) {
+            if (playerTurn(player)) {
+                if (!winningCheck()) {
+                    player = "R";
+                }
+            }
+        }
+        if (player === "R" && winningCheck() && !draw()) {
+            alert("Player red wins!");
+        } else if (player === "B" && winningCheck() && !draw()) {
+            alert("Player blue wins!");
+        } else if (draw()) {
+            alert("It's a draw!");
+        }
+        if (winningCheck() || draw()) {
+            //playYesNo = prompt("Do you want to play again?\n\"Y\" for YES, \"N\" for NO");
+            //if (playYesNo === "y") {
+            playYesNo = "";
+            while (playYesNo !== "y" && playYesNo !== "n") {
+                playYesNo = prompt("Do you want to play again?\n\"Y\" for YES, \"N\" for NO");
+                playYesNo = playYesNo.toLowerCase();
+            }
+            if (playYesNo === "y") {
+                initPlayGame(X_CORD, Y_CORD);
+                console.clear();
+                console.log(playground(1), design);
+                player = "R";
+            } else {
+                console.clear();
+                console.log("%cBye bye!", "color: #000; font-weight:bold; font-size: 5em");
+            }
+        }
+    }
+} else {
+    console.log("%cBye bye!", "color: #000; font-weight:bold; font-size: 5em");
+}
+////console.log(firh());
+////console.log(firv());
+////console.log(firdf());
+////console.log(firdb());
+//slotChoice(3, "R");
+//slotChoice(3, "R");
+//slotChoice(3, "R");
+//slotChoice(3, "R");
+//slotChoice(3, "R");
+//slotChoice(3, "R");
+//slotChoice(3, "R");
 /*slotChoice(4, "R");
 slotChoice(5, "R");
 slotChoice(6, "R");
@@ -301,11 +447,6 @@ slotChoice(3, "R");
 slotChoice(4, "R");
 slotChoice(5, "R");
 slotChoice(6, "R");*/
-console.log(playground(1));
-/*console.log(firh());
-console.log(firv());
-console.log(firdf());
-console.log(firdb());*/
 ////orderBoardToVerticalCheck();
 //console.log(board.length);
 //console.log(board[6].length);

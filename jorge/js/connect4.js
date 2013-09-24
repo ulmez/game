@@ -121,7 +121,7 @@
     //say if the column where the player try to put a piece is full
 
     function isColumnPlenty(y) {
-        return y === -1;
+        return y <= -1;
     }
     //say if the player have win with his last movement
 

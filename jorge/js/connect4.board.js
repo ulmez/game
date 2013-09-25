@@ -2,19 +2,12 @@
 /*global connect4:false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
 connect4.board = (function () {
     "use strict";
-    var mainBoard = [],
-        getArrayIndex = function (x) {
-            return x - 1;
-        };
+    var mainBoard = [];
     return {
         setValue: function (x, y, value) {
-            //we translate the user position to array position
-            x = getArrayIndex(x);
             mainBoard[y][x] = value;
         },
         getValue: function (x, y) {
-            //we translate the user position to array position
-            x = getArrayIndex(x);
             return mainBoard[y][x];
         },
         initBoard: function () {
@@ -40,8 +33,6 @@ connect4.board = (function () {
             return aux;
         },
         isXinBoardLimits: function (x) {
-            //we translate the user position to array position
-            x = getArrayIndex(x);
             return (x >= 0) && (x < connect4.config.X_CORD);
         },
         isYinBoardLimits: function (y) {

@@ -4,10 +4,34 @@ connect4.ui = (function () {
     "use strict";
     /*PRIVATE FUNCTIONS*/
     //print the head of the board, numerics 1 2 3 4 5 acording the x_axis size
-    var design = "background: #000; color: #FFF; font-weight:bold; font-size: 5em",
-        getStringHead = function () {
+    var getStyleArray = function () {
+        var value,
+            i,
+            j,
+            styleArray = [];
+        //styleArray[0] --> go the string that we want to apply styles
+        styleArray.push(connect4.config.COLOR_DEFAULT); //head style
+        for (i = 0; i < connect4.config.Y_CORD; i = i + 1) {
+            for (j = 0; j < connect4.config.X_CORD; j = j + 1) {
+                value = connect4.board.getValue(j, i);
+                switch (value) {
+                case connect4.config.DEFAULT_CHAR:
+                    styleArray.push(connect4.config.COLOR_DEFAULT);
+                    break;
+                case connect4.config.PLAYER_1_ID:
+                    styleArray.push(connect4.config.COLOR_PLAYER_1);
+                    break;
+                case connect4.config.PLAYER_2_ID:
+                    styleArray.push(connect4.config.COLOR_PLAYER_2);
+                    break;
+                }
+            }
+        }
+        return styleArray;
+    },
+        getStyledHead = function () {
             var i,
-                aux = "",
+                aux = "%c",
                 num;
             for (i = 0; i < connect4.config.X_CORD; i = i + 1) {
                 num = i + 1;
@@ -15,11 +39,31 @@ connect4.ui = (function () {
             }
             return aux;
         },
+        getStyledBoard = function () {
+            var i,
+                j,
+                value,
+                boardString = ""; //first style for the head
+            for (i = 0; i < connect4.config.Y_CORD; i = i + 1) {
+                for (j = 0; j < connect4.config.X_CORD; j = j + 1) {
+                    value = connect4.board.getValue(j, i);
+                    boardString += "%c" + value + " ";
+                }
+                boardString += "\n";
+            }
+            return boardString;
+        },
         //print the board
         printBoard = function () {
-            var head = getStringHead(),
-                board = connect4.board.getBoardInString();
-            console.log("%c" + head + "\n" + board, design);
+            var stringBoard,
+                styleArray;
+            //we obtain a string with %c before the places where is possible to change color
+            stringBoard = getStyledHead() + "\n" + getStyledBoard();
+            //we obtain the styleArray
+            styleArray = getStyleArray();
+            //we put like first element the stringBoard, this is the format that console.log.apply requires            
+            styleArray.unshift(stringBoard);
+            console.log.apply(console, styleArray);
         },
         //get de player description
         getPlayerDesc = function (isPlayer1) {
@@ -42,7 +86,11 @@ connect4.ui = (function () {
             alert('GRATTIS ' + playerDesc + 'har vunnit !! !! !! !');
         },
         showDraw: function () {
-            alert("TODO");
+            console.log('It´s a Draw !! !! !! !');
+            alert('It´ s a Draw !! !! !! !');
+        },
+        sayBye: function () {
+            console.log("Bye bye!!!!");
         }
     };
 }());

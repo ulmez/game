@@ -1,5 +1,5 @@
 /*jslint browser:true */
-/*global X_CORD: false, Y_CORD: false, BOARD: false, connect4: false, DESIGN: false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
+/*global X_CORD: false, Y_CORD: false, BOARD: false, connect4: false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
 connect4.game = (function () {
     "use strict";
     return {
@@ -16,7 +16,7 @@ connect4.game = (function () {
             if (BOARD[0][slotLocal][1] === "-") {
                 connect4.set.slot(slotLocal, p);
                 console.clear();
-                console.log(connect4.get.playground(1), DESIGN);
+                console.log(connect4.get.playground(1));
                 return true;
             }
             alert("This slot is full, take another one");
@@ -31,7 +31,7 @@ connect4.game = (function () {
             }
             if (playYesNo === "y") {
                 connect4.set.board(X_CORD, Y_CORD);
-                console.log(connect4.get.playground(1), DESIGN);
+                console.log(connect4.get.playground(1));
                 while (!connect4.winning() && !connect4.draw()) {
                     if (player === "R") {
                         if (connect4.game.playerTurn(player)) {
@@ -62,7 +62,7 @@ connect4.game = (function () {
                         if (playYesNo === "y") {
                             connect4.set.board(X_CORD, Y_CORD);
                             console.clear();
-                            console.log(connect4.get.playground(1), DESIGN);
+                            console.log(connect4.get.playground(1));
                             player = "R";
                         } else {
                             console.clear();

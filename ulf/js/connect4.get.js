@@ -2,8 +2,6 @@
 /*global BOARD: false, connect4: false, DESIGN: false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
 connect4.get = (function () {
     "use strict";
-    //var design = "background: #000; color: #FFF; font-weight:bold; font-size: 5em";
-    //BOARD;
     return {
         playground: function playground(printPos) {
             var i,

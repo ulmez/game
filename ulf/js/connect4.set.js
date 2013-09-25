@@ -6,7 +6,6 @@ var BOARD,
     DESIGN = "background: #000; color: #FFF; font-weight:bold; font-size: 5em";
 connect4.set = (function () {
     "use strict";
-    //var BOARD;
     return {
         board: function initPlayGame() {
             var i,
@@ -24,48 +23,6 @@ connect4.set = (function () {
                     BOARD[i][j] = [xy, "-"];
                 }
             }
-            //For draw check----------------------------------
-            /*connect4.set.slot(0, "R");
-            connect4.set.slot(0, "R");
-            connect4.set.slot(0, "R");
-            connect4.set.slot(6, "B");
-            connect4.set.slot(6, "R");
-            connect4.set.slot(6, "B");
-            connect4.set.slot(1, "R");
-            connect4.set.slot(1, "R");
-            connect4.set.slot(1, "R");
-            connect4.set.slot(5, "B");
-            connect4.set.slot(5, "B");
-            connect4.set.slot(5, "R");
-            connect4.set.slot(2, "B");
-            connect4.set.slot(2, "B");
-            connect4.set.slot(2, "B");
-            connect4.set.slot(4, "R");
-            connect4.set.slot(4, "B");
-            connect4.set.slot(4, "R");
-            connect4.set.slot(3, "R");
-            connect4.set.slot(3, "R");
-            connect4.set.slot(3, "R");
-            connect4.set.slot(0, "B");
-            connect4.set.slot(0, "B");
-            connect4.set.slot(1, "B");
-            connect4.set.slot(1, "B");
-            connect4.set.slot(2, "R");
-            connect4.set.slot(2, "R");
-            connect4.set.slot(6, "R");
-            connect4.set.slot(6, "R");
-            connect4.set.slot(5, "B");
-            connect4.set.slot(5, "R");
-            connect4.set.slot(3, "B");
-            connect4.set.slot(3, "B");
-            connect4.set.slot(4, "B");
-            connect4.set.slot(4, "B");
-            connect4.set.slot(0, "R");
-            connect4.set.slot(1, "R");
-            connect4.set.slot(2, "B");
-            connect4.set.slot(3, "R");
-            connect4.set.slot(4, "B");
-            connect4.set.slot(6, "B");*/
         },
         slot: function setSlot(x_pos, color) {
             var i;

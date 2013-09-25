@@ -20,9 +20,6 @@ connect4.game = (function () {
                 return true;
             }
             alert("This slot is full, take another one");
-            //if (winningCheck()) {
-            //    return p;
-            //}
             return false;
         },
         play: function play() {

@@ -6,29 +6,44 @@ connect4.play = function () {
         x, // x coordinate
         y; // y coordinate
 
+    //initialition of the board
     connect4.board.initBoard();
+
+    //whe continue until the game end
     while (true) {
+
         //print the mainBoard
         connect4.ui.showBoard();
 
-        //ask player where put the piece
+        //ask player where he/she want put the piece
         x = connect4.ui.askPlayerPosition(isPlayer1);
 
         //if user have write the exit word, its the end of the game
         if ((connect4.logic.isExit(x))) {
             break;
         }
-        //the user entry is a number and is in limits
+
+        //(else) If the user entry is a number and is in limits continue, (else) we ask again
         if (connect4.logic.isNumber(x) && connect4.board.isXinBoardLimits(x)) {
-            //piece = getPieceID(isPlayer1); //we obtain the app piece_id for the player, G --> gul and R --> röd
-            y = connect4.logic.setPiece(x, isPlayer1); //set the piece in the board and obtain the "y" position
-            if (!connect4.board.isColumnPlenty(y)) { //if the column where the player try to put the piece is full, we ask again
-                if (connect4.logic.isPlayerWin(x, y, isPlayer1)) { // have player win?
+            //if it's a number we forze it to be a number because we read from prompt and could be a String
+            x = Number(x);
+
+            //set the piece in the board and obtain the "y" coordenate, now we now the x and y coordenates
+            y = connect4.logic.setPiece(x, isPlayer1);
+
+            //if the column where the player try to put the piece is full continue,(else) we ask again
+            if (!connect4.board.isColumnPlenty(y)) {
+
+                //if player have win, show result and exit
+                if (connect4.logic.isPlayerWin(x, y, isPlayer1)) {
+                    //we showBoard to see the last movement of the user
                     connect4.ui.showBoard();
                     connect4.ui.showWinner(isPlayer1);
                     break;
                 }
-                isPlayer1 = !isPlayer1; //we change player for the next round
+
+                //(else) the player have not win, we change the player for the next round
+                isPlayer1 = !isPlayer1;
             }
         }
     }

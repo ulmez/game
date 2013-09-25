@@ -18,12 +18,12 @@ connect4.ui = (function () {
         //print the board
         printBoard = function () {
             var head = getStringHead(),
-                board = console.board.getBoardInString();
-            console.log(head + "\n" + board, design);
+                board = connect4.board.getBoardInString();
+            console.log("%c" + head + "\n" + board, design);
         },
         //get de player description
         getPlayerDesc = function (isPlayer1) {
-            return isPlayer1 ? "Player 1(" + connect4.config.PLAYER_1 + ")" : "Player 2(" + connect4.config.PLAYER_2 + ")";
+            return isPlayer1 ? "Player 1(" + connect4.config.PLAYER_1_ID + ")" : "Player 2(" + connect4.config.PLAYER_2_ID + ")";
         };
     /*PUBLIC FUNCTIONS*/
     return {

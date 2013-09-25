@@ -8,6 +8,8 @@ connect4.board = (function () {
         };
     return {
         setValue: function (x, y, value) {
+            //we translate the user position to array position
+            x = getArrayIndex(x);
             mainBoard[y][x] = value;
         },
         getValue: function (x, y) {
@@ -16,16 +18,14 @@ connect4.board = (function () {
             return mainBoard[y][x];
         },
         initBoard: function () {
-            var board = [],
-                i,
+            var i,
                 j;
             for (i = 0; i < connect4.config.Y_CORD; i = i + 1) { //for every row
-                board[i] = [];
+                mainBoard[i] = [];
                 for (j = 0; j < connect4.config.X_CORD; j = j + 1) { //for every column
-                    this.setValue(j, i, connect4.config.DEFAULT_CHAR); //put the default value
+                    mainBoard[i][j] = connect4.config.DEFAULT_CHAR;
                 }
             }
-            return board;
         },
         getBoardInString: function () {
             var aux = "",
@@ -33,7 +33,7 @@ connect4.board = (function () {
                 j;
             for (i = 0; i < connect4.config.Y_CORD; i = i + 1) { //for every row
                 for (j = 0; j < connect4.config.X_CORD; j = j + 1) { //for every column
-                    aux += this.getValue(j, i) + " "; //agrupate all the values of a row
+                    aux += mainBoard[i][j] + " "; //agrupate all the values of a row
                 }
                 aux += "\n";
             }

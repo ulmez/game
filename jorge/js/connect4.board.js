@@ -20,18 +20,6 @@ connect4.board = (function () {
                 }
             }
         },
-        getBoardInString: function () {
-            var aux = "",
-                i,
-                j;
-            for (i = 0; i < connect4.config.Y_CORD; i = i + 1) { //for every row
-                for (j = 0; j < connect4.config.X_CORD; j = j + 1) { //for every column
-                    aux += mainBoard[i][j] + " "; //agrupate all the values of a row
-                }
-                aux += "\n";
-            }
-            return aux;
-        },
         isXinBoardLimits: function (x) {
             return (x >= 0) && (x < connect4.config.X_CORD);
         },

@@ -24,7 +24,9 @@ connect4.game = (function () {
         },
         play: function play() {
             var player = "R",
-                playYesNo = "";
+                playYesNo = "",
+                theEndText = "%cBye bye!",
+                design = "color: #000; font-weight:bold; font-size: 5em";
             while (playYesNo !== "y" && playYesNo !== "n") {
                 playYesNo = prompt("Do you want to play \"Four In Row?\"\n\"Y\" for YES, \"N\" for NO");
                 playYesNo = playYesNo.toLowerCase();
@@ -66,12 +68,12 @@ connect4.game = (function () {
                             player = "R";
                         } else {
                             console.clear();
-                            console.log("%cBye bye!", "color: #000; font-weight:bold; font-size: 5em");
+                            console.log(theEndText, design);
                         }
                     }
                 }
             } else {
-                console.log("%cBye bye!", "color: #000; font-weight:bold; font-size: 5em");
+                console.log(theEndText, design);
             }
         }
     };

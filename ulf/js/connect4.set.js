@@ -29,7 +29,6 @@ connect4.set = (function () {
                 for (i = BOARD.length - 1; i >= 0; i = i - 1) {
                     if (BOARD[i][x_pos][1] === "-") {
                         BOARD[i][x_pos][1] = color;
-                        //break;
                         return true;
                     }
                 }

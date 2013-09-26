@@ -2,8 +2,7 @@
 /*global connect4: false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
 var BOARD,
     Y_CORD = 6,
-    X_CORD = 7,
-    DESIGN = "background: #000; color: #FFF; font-weight:bold; font-size: 5em";
+    X_CORD = 7;
 connect4.set = (function () {
     "use strict";
     return {

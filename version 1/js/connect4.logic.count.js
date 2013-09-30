@@ -42,7 +42,7 @@ connect4.logic.count = (function () {
                 }
             },
             //left: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the left
-            left: function (x, y, player) {
+        left: function (x, y, player) {
                 return countToDirection.countDirection(x, y, player, countToDirection.axisMovements.xLeft, countToDirection.axisMovements.notMove);
             },
             //right: function that initiate the call to the recursive function to count how many pieces in a row, it configure the recursive function to count moving to the right

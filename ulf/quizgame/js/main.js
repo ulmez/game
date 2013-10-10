@@ -63,8 +63,8 @@ arrQuestions.push(new QuestionObject("How are you?", ["good", "bad", "both", "ne
 arrQuestions.push(new QuestionObject("What color do I like?", ["red", "green", "yellow"], "yellow"));
 arrQuestions.push(new QuestionObject("What city?", ["Stockholm", "London", "New York"], "Stockholm"));
 
-setAnswers(0);
-//setAnswers(1);
+//setAnswers(0);
+setAnswers(1);
 //setAnswers(2);
 //setAnswers(3);
 

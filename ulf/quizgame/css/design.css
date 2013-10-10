@@ -8,6 +8,7 @@ background: #1A191C;
     margin-left: auto;
     margin-right: auto;
     width: 601px;
+    /* border: 1px white solid; */
 }
 h1 {
     text-align: center;
@@ -18,22 +19,36 @@ h1 {
     background-color: #rgba(255,255,255,0.5);
     width: 600px;
     color: #D9BCAB;
+    /* border: 1px white solid; */
+}
+.section2 {
+    text-align: center;
+    /* border: 1px white solid; */
 }
 .subsection {
     background-color: #rgba(255,255,255,0.5);
 }
 
 .menupos {
-    margin-left: auto;
-    margin-right: auto;
-    width: 250px;
+    /* margin-left: auto;
+    margin-right: auto; */
+    /* width: 250px; */
+    /* border: 1px white solid; */
+    /* text-align: center; */
 }
+
+.center {
+    margin: 0 auto;
+    /* text-align: center; */
+    /* border: 1px white solid; */
+}
+
 ul.menu {
     list-style-type: none;
     padding: 0px;
     padding-top: 50px;
     overflow: hidden;
-
+    /* border: 1px white solid; */
 }
 .menu li {
         float: left;
@@ -55,10 +70,10 @@ ul.menu {
         transition: all 0.5s ease-in-out;
         background-color: #888;
 }
-.menu li a {
+/* .menu li a {
         color: #D9BCAB;
         text-decoration: none;
-}
+} */
 #unseen {
     opacity: 0.0;
 }

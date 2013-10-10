@@ -28,7 +28,8 @@ function getCorrectAnswer(num) {
 
 function setAnswers(num) {
     "use strict";
-    var i;
+    var i,
+        liWidth = 0;
 
     $("h1").text(getQuestionText(num));
 
@@ -40,7 +41,10 @@ function setAnswers(num) {
         $(".menu").append('<li id="answer' + i + '"></li>');
         //$("#placeholderAnswers").append('<span id="answer' + i + '"></span>');
         $("#answer" + i).text(getQuestionAnswers(num)[i]);
+        liWidth += $("#answer" + i).width() + 20;
     }
+
+    $(".center").width(liWidth);
 
     $("li").each(function (index) {
         $("#answer" + index).click(function () {
@@ -65,8 +69,8 @@ arrQuestions.push(new QuestionObject("What color do I like?", ["red", "green", "
 arrQuestions.push(new QuestionObject("What city?", ["Stockholm", "London", "New York"], "Stockholm"));
 
 //setAnswers(0);
-//setAnswers(1);
-setAnswers(2);
+setAnswers(1);
+//setAnswers(2);
 //setAnswers(3);
 
 //console.log(arrQuestions);

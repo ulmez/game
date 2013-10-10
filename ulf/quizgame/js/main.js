@@ -32,16 +32,17 @@ function setAnswers(num) {
 
     $("#question").text(getQuestionText(num));
 
-    $("span").each(function (index) {
+    $("li").each(function (index) {
         $("#answer" + index).remove();
     });
 
     for (i = 0; i < getQuestionAnswers(num).length; i = i + 1) {
-        $("#placeholderAnswers").append('<span id="answer' + i + '"></span>');
-        $("#answer" + i).text(getQuestionAnswers(num)[i] + " ");
+        $(".menu").append('<li id="answer' + i + '"></li>');
+        //$("#placeholderAnswers").append('<span id="answer' + i + '"></span>');
+        $("#answer" + i).text(getQuestionAnswers(num)[i]);
     }
 
-    $("span").each(function (index) {
+    $("li").each(function (index) {
         $("#answer" + index).click(function () {
             alert($(this).text());
         });
@@ -50,12 +51,12 @@ function setAnswers(num) {
     $("#correctAnswer").text(getCorrectAnswer(num));
 }
 
-function deleteAnswers() {
+/*function deleteAnswers() {
     "use strict";
     $("span").each(function (index) {
         $("#answer" + index).remove();
     });
-}
+}*/
 //--------------------------------------
 
 arrQuestions.push(new QuestionObject("what name?", ["flum", "dummo", "frittjof"], "dummo"));

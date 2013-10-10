@@ -30,7 +30,7 @@ function setAnswers(num) {
     "use strict";
     var i;
 
-    $("#question").text(getQuestionText(num));
+    $("h1").text(getQuestionText(num));
 
     $("li").each(function (index) {
         $("#answer" + index).remove();
@@ -65,8 +65,8 @@ arrQuestions.push(new QuestionObject("What color do I like?", ["red", "green", "
 arrQuestions.push(new QuestionObject("What city?", ["Stockholm", "London", "New York"], "Stockholm"));
 
 //setAnswers(0);
-setAnswers(1);
-//setAnswers(2);
+//setAnswers(1);
+setAnswers(2);
 //setAnswers(3);
 
 //console.log(arrQuestions);

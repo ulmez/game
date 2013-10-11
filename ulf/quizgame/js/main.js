@@ -24,7 +24,28 @@ function getCorrectAnswer(num) {
     return arrQuestions[num].correctAnswer;
 }
 
-//UI delen------------------------------
+// UI delen-----------------------------------------
+
+function startSequence() {
+    "use strict";
+    $("#con").css({
+        left: ($(window).width() / 2) - 300
+    });
+    $("#con").animate({
+        left: "-=" + $(window).width() + "px"
+    }, 0).animate({
+        left: "+=" + $(window).width() + "px"
+    }, 1000);
+}
+
+function onResizeWindow() {
+    "use strict";
+    $(window).resize(function () {
+        $("#con").css({
+            left: ($(window).width() / 2) - 300
+        });
+    });
+}
 
 function setAnswers(num) {
     "use strict";
@@ -48,25 +69,25 @@ function setAnswers(num) {
 
     $("li").each(function (index) {
         $("#answer" + index).click(function () {
-            alert($(this).text());
+            $("#con").animate({
+                left: "-=" + $(window).width() + "px"
+            }, 1000).animate({
+                left: "+=" + $(window).width() + "px"
+            }, 1000);
         });
     });
 
     $("#correctAnswer").text(getCorrectAnswer(num));
 }
-
-/*function deleteAnswers() {
-    "use strict";
-    $("span").each(function (index) {
-        $("#answer" + index).remove();
-    });
-}*/
-//--------------------------------------
+// -------------------------------------------------
 
 arrQuestions.push(new QuestionObject("what name?", ["flum", "dummo", "frittjof"], "dummo"));
 arrQuestions.push(new QuestionObject("How are you?", ["good", "bad", "both", "neither"], "bad"));
 arrQuestions.push(new QuestionObject("What color do I like?", ["red", "green", "yellow"], "yellow"));
 arrQuestions.push(new QuestionObject("What city?", ["Stockholm", "London", "New York"], "Stockholm"));
+
+startSequence();
+onResizeWindow();
 
 //setAnswers(0);
 setAnswers(1);

@@ -5,6 +5,7 @@ background: #1A191C;
     -webkit-filter: grayscale(30%);
 }
 .container {
+    position: fixed;
     margin-left: auto;
     margin-right: auto;
     width: 601px;

@@ -81,10 +81,10 @@ function setAnswers(num) {
 }
 // -------------------------------------------------
 
-arrQuestions.push(new QuestionObject("what name?", ["flum", "dummo", "frittjof"], "dummo"));
-arrQuestions.push(new QuestionObject("How are you?", ["good", "bad", "both", "neither"], "bad"));
-arrQuestions.push(new QuestionObject("What color do I like?", ["red", "green", "yellow"], "yellow"));
-arrQuestions.push(new QuestionObject("What city?", ["Stockholm", "London", "New York"], "Stockholm"));
+arrQuestions.push(new QuestionObject("Paraguay has borders with Brazil, Bolivia and which other country?", ["Argentina", "Colombia", "Ecuador"], "Argentina"));
+arrQuestions.push(new QuestionObject("What is the capital city of Afghanistan?", ["Bombay", "Kabul", "Tehran"], "Kabul"));
+arrQuestions.push(new QuestionObject("Which band recorded the soundtrack to the first Highlander film?", ["Rush", "Primus", "Queen"], "Queen"));
+arrQuestions.push(new QuestionObject("Which actor had the lead role in Enter the dragon?", ["Errol Flynn", "Bruce Lee", "Mike Myers "], "Bruce Lee"));
 
 startSequence();
 onResizeWindow();

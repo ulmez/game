@@ -1,20 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <title>Quiz</title> -->
-        <!--<link rel="stylesheet" href="css/style.css"/>-->
-    <!-- </head>
-    <body>
-        <h1>Quiz</h1>
-        <div id="question"></div>
-        <div id="placeholderAnswers"></div>
-        <div id="correctAnswer"></div>
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
     <title>
@@ -29,21 +12,24 @@
                 Question?
             </h1>
         </div>
-        <!-- <div class="menupos"> -->
-            <div class="center">
-                <ul class="menu">
-                    <!-- <li><a href="#omig">answer1</a></li>
-                    <li><a href="#erfar" >answer2</a></li>
-                    <li><a href="#utbild" >answer3</a></li> -->
+            <div class="menupos">
+                <ul class="menu" id="buttonBlocker">
+                    <li id="answer0"></li>
+                    <li id="answer1"></li>
+                    <li id="answer2"></li>
+                    <li id="yes">yes</li>
+                    <li id="no">no</li>
                 </ul>
             </div>
-        <!-- </div> -->
         <div class="section2">
             <span id="correctAnswer"></span>
         </div>
     </div>
-    <!-- <span id="correctAnswer"></span> -->
         <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/underscore-min.js"></script>
+        <script src="js/quiz.js"></script>
+        <script src="js/quiz.logic.js"></script>
+        <script src="js/quiz.ui.js"></script>
         <script src="js/main.js"></script>
 </body>
 </html>

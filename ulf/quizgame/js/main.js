@@ -5,3 +5,7 @@ quiz.logic.initQuestionObjects();
 quiz.ui.onStart();
 quiz.ui.resizeWindow();
 quiz.ui.play();
+/* var tempus = "This  is  a  string.";
+var counting = tempus.match(/ /g);
+
+alert(counting.length); */

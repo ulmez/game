@@ -4,11 +4,10 @@
 quiz.logic = (function () {
     "use strict";
     return {
-        QuestionClass: function QuestionObject(question, answers, correctAnswer, widthUl) {
+        QuestionClass: function QuestionObject(question, answers, correctAnswer) {
             this.question = question;
             this.answers = answers;
             this.correctAnswer = correctAnswer;
-            this.widthUl = widthUl;
         },
 
         questionText: function getQuestionText(num) {
@@ -23,15 +22,11 @@ quiz.logic = (function () {
             return arrQuestions[num].correctAnswer;
         },
 
-        widthUl: function getWidthUl(num) {
-            return arrQuestions[num].widthUl;
-        },
-
         initQuestionObjects: function () {
-            arrQuestions.push(new quiz.logic.QuestionClass("what name fghdfg fdgdf?", ["flum", "dummo", "frittjof"], "dummo", 196));
-            arrQuestions.push(new quiz.logic.QuestionClass("How are you fgd fgdfh dfg dfg?", ["good", "bad", "both"], "bad", 156));
-            arrQuestions.push(new quiz.logic.QuestionClass("What color do I like dfg hdfgh dfg fg?", ["red", "green", "yellow"], "yellow", 173));
-            arrQuestions.push(new quiz.logic.QuestionClass("What city dfh fdgh dffgh?", ["Stockholm", "London", "New York"], "Stockholm", 262));
+            arrQuestions.push(new quiz.logic.QuestionClass("what name fghdfg fdgdf?", ["flum", "dummo", "frittjof"], "dummo"));
+            arrQuestions.push(new quiz.logic.QuestionClass("How are you fgd fgdfh dfg dfg?", ["good", "bad", "both"], "bad"));
+            arrQuestions.push(new quiz.logic.QuestionClass("What color do I like dfg hdfgh dfg fg?", ["red", "green", "yellow"], "yellow"));
+            arrQuestions.push(new quiz.logic.QuestionClass("What city dfh fdgh dffgh?", ["Stockholm", "London", "New York"], "Stockholm"));
         }
     };
 }());

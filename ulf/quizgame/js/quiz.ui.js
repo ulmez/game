@@ -32,6 +32,9 @@ quiz.ui = (function () {
 
         answers: function setAnswers() {
             var liWidth = 0,
+                numWhiteSpaces,
+                whiteSpaceTotalWidth = 0,
+                tempString,
                 i;
 
             $("#yes").hide();
@@ -44,13 +47,42 @@ quiz.ui = (function () {
             $("h1").text(quiz.logic.questionText(num));
 
             arrQuestions[num].answers = _.shuffle(arrQuestions[num].answers);
+            /* var tempus = "This  is  a  string.";
+            var counting = tempus.match(/ /g);
+
+            alert(counting.length); */
+            //numWhiteSpaces = 0;
+
+            //regex = new RegExp(" ", "gi");
+            //numWhiteSpaces = "This is some text".match(regex).length;
+
+            /*for (i = 0; i < 3; i = i + 1) {
+                //tempString = quiz.logic.questionAnswers(num)[i];
+                numWhiteSpaces = (quiz.logic.questionAnswers(num)[i]).match(regex).length;
+                alert(numWhiteSpaces);
+            }*/
+
+            /*tempString = 'This is so  me text';
+            numWhiteSpaces = tempString.split(" ").length - 1;
+            alert("white space appears " + numWhiteSpaces + " times");*/
 
             for (i = 0; i < 3; i = i + 1) {
                 $("#answer" + i).text(quiz.logic.questionAnswers(num)[i]);
-                //liWidth += $("#answer" + i).width() + 25;
-            }
 
-            liWidth = quiz.logic.widthUl(num);
+                //--------------------
+                tempString = $("#answer" + i).text();
+                numWhiteSpaces = tempString.split(" ").length - 1;
+                //alert("white space appears " + numWhiteSpaces + " times");
+                whiteSpaceTotalWidth += numWhiteSpaces * 6;
+                //--------------------
+
+                liWidth += $("#answer" + i).width() + whiteSpaceTotalWidth + 20;
+                //alert(liWidth);
+                //alert(quiz.logic.questionAnswers(num)[i]);
+            }
+            //alert(numWhiteSpaces);
+            //alert(liWidth);
+            //liWidth = quiz.logic.widthUl(num);
 
             $(".menupos").width(liWidth);
 
@@ -101,11 +133,14 @@ quiz.ui = (function () {
                             if (num !== 0) {
                                 $("h1").text(quiz.logic.questionText(num));
                                 arrQuestions[num].answers = _.shuffle(arrQuestions[num].answers);
+                                liWidth = 0;
                                 for (i = 0; i < 3; i = i + 1) {
                                     $("#answer" + i).text(quiz.logic.questionAnswers(num)[i]);
-                                    //liWidth += $("#answer" + i).width() + 25;
+                                    liWidth += $("#answer" + i).width() + 20;
+                                    //alert(liWidth);
                                 }
-                                liWidth = quiz.logic.widthUl(num);
+                                //liWidth = quiz.logic.widthUl(num);
+                                //alert(liWidth);
                                 $(".menupos").width(liWidth);
                                 //$("#correctAnswer").text("Wrong, the right answer is: " + getCorrectAnswer(num));
                             }

@@ -1,5 +1,6 @@
 body {
 background: #1A191C;
+background-image:url('../img/arnold.jpg');
 }
     img {
     -webkit-filter: grayscale(30%);

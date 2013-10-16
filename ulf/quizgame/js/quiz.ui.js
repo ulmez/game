@@ -4,10 +4,19 @@
 quiz.ui = (function () {
     "use strict";
     return {
+        loadSound: function loadGivenSound(soundId, delayTime) {
+            var audio;
+            setTimeout(function () {
+                audio = document.querySelector(soundId);
+                audio.load();
+                audio.play();
+            }, delayTime);
+        },
+
         onStart: function startSequence() {
             var liWidth = 0,
                 i;
-            $("h1").text("Do you want to play my quiz game?");
+            $("h1").text("Do you want to answer Arnolds questions?");
 
             $("#correctAnswer").hide();
 
@@ -28,6 +37,8 @@ quiz.ui = (function () {
             }, 0).animate({
                 left: "+=" + $(window).width() + "px"
             }, 1000); //.fadeOut("slow");
+
+            quiz.ui.loadSound("#questions", 1000);
         },
 
         answers: function setAnswers() {

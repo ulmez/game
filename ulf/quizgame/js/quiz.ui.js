@@ -303,6 +303,10 @@ quiz.ui = (function () {
             });
 
             $("#no").click(function () {
+                $("body").removeClass("arnold");
+                $("body").removeClass("terminator");
+                $("body").removeClass("totalrecall");
+                $("body").addClass("busharnold");
                 $("#con").animate({
                     left: "-=" + $(window).width() + "px"
                 }, 1000).animate({
@@ -311,7 +315,7 @@ quiz.ui = (function () {
                 setTimeout(function () {
                     $("#yes").hide();
                     $("#no").hide();
-                    $("h1").text("Game Over");
+                    $("h1").html("You are no Arnold,<br />you are a Bush...");
                 }, 1000);
             });
         },

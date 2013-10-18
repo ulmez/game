@@ -37,6 +37,14 @@ background-size: 110%;*/
     background-repeat: no-repeat;
 }
 
+.busharnold{
+    background-image:url('../img/busharnold.jpg');
+    /* background-size: 115%; */
+
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
     img {
     -webkit-filter: grayscale(30%);
 }

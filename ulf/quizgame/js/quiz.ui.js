@@ -308,11 +308,14 @@ quiz.ui = (function () {
             });
 
             $("#no").click(function () {
-                $("body").removeClass("arnold");
-                $("body").removeClass("terminator");
-                $("body").removeClass("totalrecall");
-                $("body").removeClass("average");
-                $("body").addClass("busharnold");
+                setTimeout(function () {
+                    $("body").removeClass("arnold");
+                    $("body").removeClass("terminator");
+                    $("body").removeClass("totalrecall");
+                    $("body").removeClass("average");
+                    $("body").addClass("busharnold");
+                }, 1000);
+
                 $("#con").animate({
                     left: "-=" + $(window).width() + "px"
                 }, 1000).animate({

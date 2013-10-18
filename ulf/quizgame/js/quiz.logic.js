@@ -31,7 +31,7 @@ quiz.logic = (function () {
             arrQuestions.push(new quiz.logic.QuestionClass("In which country was Arnold born?", ["Austria", "Germany", "Holland"], "Austria"));
             arrQuestions.push(new quiz.logic.QuestionClass("What year did arnold become the governor of california?", ["2002", "2003", "2004"], "2003"));
             arrQuestions.push(new quiz.logic.QuestionClass("In which movie did arnold become pregnant?", ["twins", "true lies", "junior"], "junior"));
-            arrQuestions.push(new quiz.logic.QuestionClass("What is the name of Arnolds wife?", ["Maria Shriver", "Anna Shriver", "Sharon Shriver"], "Maria Shriver"));
+            //arrQuestions.push(new quiz.logic.QuestionClass("What is the name of Arnolds wife?", ["Maria Shriver", "Anna Shriver", "Sharon Shriver"], "Maria Shriver"));
         }
         //How many Mr Olympia titles have Arnold won? 5 *7 9
         //In which country was Arnold born? *Austria, Germany, Holland

@@ -143,7 +143,7 @@ quiz.ui = (function () {
                         } else {
                             num = 0;
                             setTimeout(function () {
-                                quiz.ui.loadSound("#fuckyou", 1000);
+                                quiz.ui.loadSound("#discipline", 1000);
                                 $("body").removeClass("arnold");
                                 $("body").addClass("totalrecall");
                                 if (score > 0) {
@@ -249,7 +249,7 @@ quiz.ui = (function () {
                                     $('body').addClass("terminator");
                                     $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Well done!<br />Do you want to play again?");
                                 } else {
-                                    quiz.ui.loadSound("#fuckyou", 1000);
+                                    quiz.ui.loadSound("#discipline", 1000);
                                     $("body").removeClass("arnold");
                                     $('body').addClass("totalrecall");
                                     $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />You are bad!<br />Do you want to play again?");

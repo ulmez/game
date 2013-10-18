@@ -85,8 +85,8 @@ quiz.ui = (function () {
                         setTimeout(function () {
                             $("body").removeClass("arnold");
                             if (score > 0) {
-                                $("body").addClass("arnold");
-                                $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
+                                $("body").addClass("average");
+                                $("h1").html("Pretty good but you are not a terminator.<br />Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
                             } else {
                                 quiz.ui.loadSound("#discipline", 1000);
                                 $("body").addClass("totalrecall");
@@ -242,7 +242,10 @@ quiz.ui = (function () {
                             } else {
                                 num = 0;
                                 if (score < arrQuestions.length && score > 0) {
-                                    $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
+                                    $("body").removeClass("arnold");
+                                    $('body').addClass("average");
+                                    $("h1").html("Pretty good but you are not a terminator.<br />Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
+                                    //$("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
                                 } else if (score === arrQuestions.length) {
                                     quiz.ui.loadSound("#hastalavista", 1000);
                                     $("body").removeClass("arnold");
@@ -291,6 +294,7 @@ quiz.ui = (function () {
                 arrQuestions = _.shuffle(arrQuestions);
                 $("body").removeClass("terminator");
                 $("body").removeClass("totalrecall");
+                $("body").removeClass("average");
                 $("body").addClass("arnold");
                 $("#con").animate({
                     left: "-=" + $(window).width() + "px"

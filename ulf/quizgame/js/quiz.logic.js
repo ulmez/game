@@ -25,8 +25,8 @@ quiz.logic = (function () {
         initQuestionObjects: function () {
             arrQuestions.push(new quiz.logic.QuestionClass("what name fghdfg fdgdf?", ["flum", "dummo", "frittjof"], "dummo"));
             arrQuestions.push(new quiz.logic.QuestionClass("How are you fgd fgdfh dfg dfg?", ["good", "bad", "both"], "bad"));
-            arrQuestions.push(new quiz.logic.QuestionClass("What color do I like dfg hdfgh dfg fg?", ["red", "green", "yellow"], "yellow"));
-            arrQuestions.push(new quiz.logic.QuestionClass("What city dfh fdgh dffgh?", ["Stockholm", "London", "New York"], "Stockholm"));
+            //arrQuestions.push(new quiz.logic.QuestionClass("What color do I like dfg hdfgh dfg fg?", ["red", "green", "yellow"], "yellow"));
+            //arrQuestions.push(new quiz.logic.QuestionClass("What city dfh fdgh dffgh?", ["Stockholm", "London", "New York"], "Stockholm"));
         }
     };
 }());

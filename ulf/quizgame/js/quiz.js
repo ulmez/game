@@ -4,4 +4,5 @@
 var quiz = {},
     arrQuestions = [],
     num = 0,
-    score = 0;
+    score = 0,
+    answerBeforeTimesUp;

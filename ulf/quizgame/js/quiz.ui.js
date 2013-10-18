@@ -1,6 +1,6 @@
 /*jslint browser:true */
-/*global $: false, quiz: false, num: true, score: true, arrQuestions: false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
-
+/*global answerBeforeTimesUp: true, $: false, quiz: false, num: true, score: true, arrQuestions: false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
+var breakBoot = false;
 quiz.ui = (function () {
     "use strict";
     return {
@@ -41,11 +41,18 @@ quiz.ui = (function () {
             quiz.ui.loadSound("#questions", 1000);
         },
 
+        //tickMaintenance: function boot() {
+        //    var liWidth = 0,
+        //        i;
+
+        //},
+
         answers: function setAnswers() {
             var liWidth = 0,
                 numWhiteSpaces,
                 whiteSpaceTotalWidth = 0,
                 tempString,
+                //answerBeforeTimesUp,
                 i;
 
             $("#yes").hide();
@@ -97,15 +104,124 @@ quiz.ui = (function () {
 
             $(".menupos").width(liWidth);
 
+            quiz.ui.loadSound("#nightmare", 1000);
+
+            answerBeforeTimesUp = setTimeout(function () {
+                //------------
+                (function boot() {
+                    if (breakBoot) {
+                        return false;
+                    }
+
+                    //---------------------------
+                    if (num < arrQuestions.length - 1) {
+                        quiz.ui.loadSound("#nightmare", 5000);
+                        //alert("Time is up...");
+                    }
+
+                    $("#correctAnswer").show(); //.wait(3000).hide();
+                    $("#correctAnswer").text("To late, the right answer is: " + quiz.logic.correctAnswer(num));
+                    if ($("#buttonBlocker").hasClass("menu")) {
+                        $("#buttonBlocker").removeClass("menu");
+                        $("#buttonBlocker").addClass("blocked");
+                        setTimeout(function () {
+                            $("#correctAnswer").hide();
+                        }, 3000);
+                        $("#con").delay(3000).animate({
+                            left: "-=" + $(window).width() + "px"
+                        }, 1000).animate({
+                            left: "+=" + $(window).width() + "px"
+                        }, 1000);
+
+                        setTimeout(function () {
+                            $("#buttonBlocker").removeClass("blocked");
+                            $("#buttonBlocker").addClass("menu");
+                        }, 4000);
+
+                        if (num < arrQuestions.length - 1) {
+                            num += 1;
+                        } else {
+                            num = 0;
+                            setTimeout(function () {
+                                quiz.ui.loadSound("#fuckyou", 1000);
+                                $("body").removeClass("arnold");
+                                $("body").addClass("totalrecall");
+                                if (score > 0) {
+                                    $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
+                                } else {
+                                    $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />You are bad!<br />Do you want to play again?");
+                                }
+                                score = 0;
+                                liWidth = $("#yes").width() + $("#no").width() + 40;
+                                $(".menupos").width(liWidth);
+                                for (i = 0; i < 3; i = i + 1) {
+                                    $("#answer" + i).hide();
+                                }
+                                $("#yes").show();
+                                $("#no").show();
+                            }, 4000);
+                            return false;
+                        }
+
+                        if (num !== 0) {
+                            setTimeout(function () {
+                                $("h1").text(quiz.logic.questionText(num));
+                                arrQuestions[num].answers = _.shuffle(arrQuestions[num].answers);
+                                liWidth = 0;
+                                for (i = 0; i < 3; i = i + 1) {
+                                    $("#answer" + i).text(quiz.logic.questionAnswers(num)[i]);
+                                    liWidth += $("#answer" + i).width() + 20;
+                                    //alert(liWidth);
+                                }
+                                //liWidth = quiz.logic.widthUl(num);
+                                //alert(liWidth);
+                                $(".menupos").width(liWidth);
+                                //$("#correctAnswer").text("Wrong, the right answer is: " + getCorrectAnswer(num));
+                            }, 4000);
+                        }
+                    }
+                    //---------------------------
+
+                    //alert("Time is up...");
+                    setTimeout(boot, 23500);
+                }());
+                //------------
+            }, 19500);
+
             $("li").each(function (index) {
                 $("#answer" + index).click(function () {
                     if ($("#buttonBlocker").hasClass("menu")) {
+                        breakBoot = true;
+                        //-----------------
+                        $('#nightmare')[0].pause();
+
+                        clearTimeout(answerBeforeTimesUp);
+                        answerBeforeTimesUp = "";
+
+                        if (num < arrQuestions.length - 1) {
+                            //alert("flumm");
+                            quiz.ui.loadSound("#nightmare", 5000);
+                            answerBeforeTimesUp = setTimeout(function () {
+
+                                //alert("Time is up...");
+                                //----------------------------
+                                (function boot() {
+                                    alert("Time is up...");
+                                    setTimeout(boot, 5000);
+                                }());
+                                //----------------------------
+
+                            }, 23500);
+                        }
+
                         $("#buttonBlocker").removeClass("menu");
                         $("#buttonBlocker").addClass("blocked");
                         if ($(this).text() === quiz.logic.correctAnswer(num)) {
                             score += 1;
+                            quiz.ui.loadSound("#affirmative", 0);
                             $("#correctAnswer").text("That was correct!");
                         } else {
+                            quiz.ui.loadSound("#nodeal", 0);
                             $("#correctAnswer").text("Wrong, the right answer is: " + quiz.logic.correctAnswer(num));
                         }
                         $("#correctAnswer").show(); //.wait(3000).hide();
@@ -128,8 +244,14 @@ quiz.ui = (function () {
                                 if (score < arrQuestions.length && score > 0) {
                                     $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
                                 } else if (score === arrQuestions.length) {
+                                    quiz.ui.loadSound("#hastalavista", 1000);
+                                    $("body").removeClass("arnold");
+                                    $('body').addClass("terminator");
                                     $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Well done!<br />Do you want to play again?");
                                 } else {
+                                    quiz.ui.loadSound("#fuckyou", 1000);
+                                    $("body").removeClass("arnold");
+                                    $('body').addClass("totalrecall");
                                     $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />You are bad!<br />Do you want to play again?");
                                 }
                                 score = 0;
@@ -165,7 +287,11 @@ quiz.ui = (function () {
 
         play: function playYesNo() {
             $("#yes").click(function () {
+                //playRound += 1;
                 arrQuestions = _.shuffle(arrQuestions);
+                $("body").removeClass("terminator");
+                $("body").removeClass("totalrecall");
+                $("body").addClass("arnold");
                 $("#con").animate({
                     left: "-=" + $(window).width() + "px"
                 }, 1000).animate({

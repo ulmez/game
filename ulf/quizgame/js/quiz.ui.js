@@ -291,6 +291,7 @@ quiz.ui = (function () {
         play: function playYesNo() {
             $("#yes").click(function () {
                 //playRound += 1;
+                checkOfTickStatement = 0;
                 arrQuestions = _.shuffle(arrQuestions);
                 $("body").removeClass("terminator");
                 $("body").removeClass("totalrecall");
@@ -310,6 +311,7 @@ quiz.ui = (function () {
                 $("body").removeClass("arnold");
                 $("body").removeClass("terminator");
                 $("body").removeClass("totalrecall");
+                $("body").removeClass("average");
                 $("body").addClass("busharnold");
                 $("#con").animate({
                     left: "-=" + $(window).width() + "px"

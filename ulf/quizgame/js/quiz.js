@@ -5,4 +5,6 @@ var quiz = {},
     arrQuestions = [],
     num = 0,
     score = 0,
+    breakBoot = false,
+    checkOfTickStatement = 0,
     answerBeforeTimesUp;

@@ -53,13 +53,12 @@ quiz.ui = (function () {
                     return false;
                 }
 
-                //---------------------------
                 if (num < arrQuestions.length - 1) {
                     quiz.ui.loadSound("#nightmare", 5000);
                     //alert("Time is up...");
                 }
 
-                $("#correctAnswer").show(); //.wait(3000).hide();
+                $("#correctAnswer").show();
                 $("#correctAnswer").text("To late, the right answer is: " + quiz.logic.correctAnswer(num));
                 if ($("#buttonBlocker").hasClass("menu")) {
                     $("#buttonBlocker").removeClass("menu");
@@ -112,18 +111,11 @@ quiz.ui = (function () {
                             for (i = 0; i < 3; i = i + 1) {
                                 $("#answer" + i).text(quiz.logic.questionAnswers(num)[i]);
                                 liWidth += $("#answer" + i).width() + 20;
-                                //alert(liWidth);
                             }
-                            //liWidth = quiz.logic.widthUl(num);
-                            //alert(liWidth);
                             $(".menupos").width(liWidth);
-                            //$("#correctAnswer").text("Wrong, the right answer is: " + getCorrectAnswer(num));
                         }, 4000);
                     }
                 }
-                //---------------------------
-
-                //alert("Time is up...");
                 setTimeout(boot, 23500);
             }());
         },
@@ -133,7 +125,6 @@ quiz.ui = (function () {
                 numWhiteSpaces,
                 whiteSpaceTotalWidth = 0,
                 tempString,
-                //answerBeforeTimesUp,
                 i;
 
             $("#yes").hide();
@@ -146,51 +137,22 @@ quiz.ui = (function () {
             $("h1").text(quiz.logic.questionText(num));
 
             arrQuestions[num].answers = _.shuffle(arrQuestions[num].answers);
-            /* var tempus = "This  is  a  string.";
-            var counting = tempus.match(/ /g);
-
-            alert(counting.length); */
-            //numWhiteSpaces = 0;
-
-            //regex = new RegExp(" ", "gi");
-            //numWhiteSpaces = "This is some text".match(regex).length;
-
-            /*for (i = 0; i < 3; i = i + 1) {
-                //tempString = quiz.logic.questionAnswers(num)[i];
-                numWhiteSpaces = (quiz.logic.questionAnswers(num)[i]).match(regex).length;
-                alert(numWhiteSpaces);
-            }*/
-
-            /*tempString = 'This is so  me text';
-            numWhiteSpaces = tempString.split(" ").length - 1;
-            alert("white space appears " + numWhiteSpaces + " times");*/
 
             for (i = 0; i < 3; i = i + 1) {
                 $("#answer" + i).text(quiz.logic.questionAnswers(num)[i]);
-
-                //--------------------
                 tempString = $("#answer" + i).text();
                 numWhiteSpaces = tempString.split(" ").length - 1;
-                //alert("white space appears " + numWhiteSpaces + " times");
                 whiteSpaceTotalWidth += numWhiteSpaces * 6;
-                //--------------------
 
                 liWidth += $("#answer" + i).width() + whiteSpaceTotalWidth + 20;
-                //alert(liWidth);
-                //alert(quiz.logic.questionAnswers(num)[i]);
             }
-            //alert(numWhiteSpaces);
-            //alert(liWidth);
-            //liWidth = quiz.logic.widthUl(num);
 
             $(".menupos").width(liWidth);
 
             quiz.ui.loadSound("#nightmare", 1000);
 
             answerBeforeTimesUp = setTimeout(function () {
-                //------------
                 quiz.ui.tickMaintenance();
-                //------------
             }, 19500);
 
             $("li").each(function (index) {
@@ -198,17 +160,15 @@ quiz.ui = (function () {
                     if ($("#buttonBlocker").hasClass("menu")) {
                         checkOfTickStatement = 1;
                         breakBoot = true;
-                        //-----------------
+
                         $('#nightmare')[0].pause();
 
                         clearTimeout(answerBeforeTimesUp);
                         answerBeforeTimesUp = "";
 
                         if (num < arrQuestions.length - 1) {
-                            //alert("flumm");
                             quiz.ui.loadSound("#nightmare", 5000);
                             answerBeforeTimesUp = setTimeout(function () {
-                                //alert("Time is up...");
                                 checkOfTickStatement = 0;
                                 quiz.ui.tickMaintenance();
                             }, 23500);
@@ -224,7 +184,7 @@ quiz.ui = (function () {
                             quiz.ui.loadSound("#nodeal", 0);
                             $("#correctAnswer").text("Wrong, the right answer is: " + quiz.logic.correctAnswer(num));
                         }
-                        $("#correctAnswer").show(); //.wait(3000).hide();
+                        $("#correctAnswer").show();
                         setTimeout(function () {
                             $("#correctAnswer").hide();
                         }, 3000);
@@ -245,7 +205,6 @@ quiz.ui = (function () {
                                     $("body").removeClass("arnold");
                                     $('body').addClass("average");
                                     $("h1").html("Pretty good but you are not a terminator.<br />Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
-                                    //$("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
                                 } else if (score === arrQuestions.length) {
                                     quiz.ui.loadSound("#hastalavista", 1000);
                                     $("body").removeClass("arnold");
@@ -273,12 +232,8 @@ quiz.ui = (function () {
                                 for (i = 0; i < 3; i = i + 1) {
                                     $("#answer" + i).text(quiz.logic.questionAnswers(num)[i]);
                                     liWidth += $("#answer" + i).width() + 20;
-                                    //alert(liWidth);
                                 }
-                                //liWidth = quiz.logic.widthUl(num);
-                                //alert(liWidth);
                                 $(".menupos").width(liWidth);
-                                //$("#correctAnswer").text("Wrong, the right answer is: " + getCorrectAnswer(num));
                             }
                         }, 4000);
                     }
@@ -290,7 +245,6 @@ quiz.ui = (function () {
 
         play: function playYesNo() {
             $("#yes").click(function () {
-                //playRound += 1;
                 checkOfTickStatement = 0;
                 checkBuzzerStatement = 1;
 

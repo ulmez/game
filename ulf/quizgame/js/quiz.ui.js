@@ -45,10 +45,6 @@ quiz.ui = (function () {
                 i;
             breakBoot = false;
             (function boot() {
-                //setTimeout(function () {
-                //    irro = 0;
-                //}, 22500);
-
                 if (checkOfTickStatement === 0 && checkBuzzerStatement === 0) {
                     quiz.ui.loadSound("#buzzer", 0);
                 }

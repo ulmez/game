@@ -84,6 +84,7 @@ quiz.ui = (function () {
                             $("body").removeClass("arnold");
                             if (score > 0) {
                                 $("body").addClass("average");
+                                quiz.ui.loadSound("#talkhand", 1000);
                                 $("h1").html("Pretty good but you are not a terminator.<br />Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
                             } else {
                                 quiz.ui.loadSound("#discipline", 1000);
@@ -202,6 +203,7 @@ quiz.ui = (function () {
                                 if (score < arrQuestions.length && score > 0) {
                                     $("body").removeClass("arnold");
                                     $('body').addClass("average");
+                                    quiz.ui.loadSound("#talkhand", 1000);
                                     $("h1").html("Pretty good but you are not a terminator.<br />Your final score is: " + score + " of " + arrQuestions.length + "<br />Do you want to play again?");
                                 } else if (score === arrQuestions.length) {
                                     quiz.ui.loadSound("#hastalavista", 1000);
@@ -272,6 +274,7 @@ quiz.ui = (function () {
                     $("body").removeClass("totalrecall");
                     $("body").removeClass("average");
                     $("body").addClass("busharnold");
+                    quiz.ui.loadSound("#sadtrombone", 1000);
                 }, 1000);
 
                 $("#con").animate({

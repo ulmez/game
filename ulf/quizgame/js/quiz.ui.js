@@ -1,5 +1,5 @@
 /*jslint browser:true */
-/*global checkOfTickStatement: true, breakBoot: true, answerBeforeTimesUp: true, $: false, quiz: false, num: true, score: true, arrQuestions: false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
+/*global checkBuzzerStatement: true, checkOfTickStatement: true, breakBoot: true, answerBeforeTimesUp: true, $: false, quiz: false, num: true, score: true, arrQuestions: false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
 quiz.ui = (function () {
     "use strict";
     return {
@@ -45,7 +45,11 @@ quiz.ui = (function () {
                 i;
             breakBoot = false;
             (function boot() {
-                if (checkOfTickStatement === 0) {
+                //setTimeout(function () {
+                //    irro = 0;
+                //}, 22500);
+
+                if (checkOfTickStatement === 0 && checkBuzzerStatement === 0) {
                     quiz.ui.loadSound("#buzzer", 0);
                 }
 
@@ -292,6 +296,12 @@ quiz.ui = (function () {
             $("#yes").click(function () {
                 //playRound += 1;
                 checkOfTickStatement = 0;
+                checkBuzzerStatement = 1;
+
+                setTimeout(function () {
+                    checkBuzzerStatement = 0;
+                }, 18500);
+
                 arrQuestions = _.shuffle(arrQuestions);
                 $("body").removeClass("terminator");
                 $("body").removeClass("totalrecall");

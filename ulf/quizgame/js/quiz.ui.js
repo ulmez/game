@@ -35,7 +35,7 @@ quiz.ui = (function () {
                 left: "-=" + $(window).width() + "px"
             }, 0).animate({
                 left: "+=" + $(window).width() + "px"
-            }, 1000); //.fadeOut("slow");
+            }, 1000);
 
             quiz.ui.loadSound("#questions", 1000);
         },
@@ -193,7 +193,6 @@ quiz.ui = (function () {
                             left: "+=" + $(window).width() + "px"
                         }, 1000);
                         setTimeout(function () {
-                            //liWidth = 0;
                             $("#buttonBlocker").removeClass("blocked");
                             $("#buttonBlocker").addClass("menu");
                             if (num < arrQuestions.length - 1) {

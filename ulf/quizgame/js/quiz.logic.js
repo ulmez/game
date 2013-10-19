@@ -1,6 +1,5 @@
 /*jslint browser:true */
 /*global quiz: false, arrQuestions: false, alert: false, confirm: false, console: false, Debug: false, opera: false, prompt: false, WSH: false */
-
 quiz.logic = (function () {
     "use strict";
     return {

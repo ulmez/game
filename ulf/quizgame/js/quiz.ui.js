@@ -55,7 +55,6 @@ quiz.ui = (function () {
 
                 if (num < arrQuestions.length - 1) {
                     quiz.ui.loadSound("#nightmare", 5000);
-                    //alert("Time is up...");
                 }
 
                 $("#correctAnswer").show();

@@ -89,7 +89,7 @@ quiz.ui = (function () {
                             } else {
                                 quiz.ui.loadSound("#discipline", 1000);
                                 $("body").addClass("totalrecall");
-                                $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />You are bad!<br />Do you want to play again?");
+                                $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Arnold is very disappointed with you!<br />Do you want to play again?");
                             }
                             score = 0;
                             liWidth = $("#yes").width() + $("#no").width() + 40;
@@ -214,7 +214,7 @@ quiz.ui = (function () {
                                     quiz.ui.loadSound("#discipline", 1000);
                                     $("body").removeClass("arnold");
                                     $('body').addClass("totalrecall");
-                                    $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />You are bad!<br />Do you want to play again?");
+                                    $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Arnold is very disappointed with you!<br />Do you want to play again?");
                                 }
                                 score = 0;
                                 liWidth = $("#yes").width() + $("#no").width() + 40;
@@ -285,7 +285,7 @@ quiz.ui = (function () {
                 setTimeout(function () {
                     $("#yes").hide();
                     $("#no").hide();
-                    $("h1").html("You are no Arnold,<br />you are a Bush...");
+                    $("h1").html("You are not a Terminator,<br />you are a bush");
                 }, 1000);
             });
         },

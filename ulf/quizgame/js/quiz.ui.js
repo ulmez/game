@@ -209,7 +209,7 @@ quiz.ui = (function () {
                                     quiz.ui.loadSound("#hastalavista", 1000);
                                     $("body").removeClass("arnold");
                                     $('body').addClass("terminator");
-                                    $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Well done!<br />Do you want to play again?");
+                                    $("h1").html("Your final score is: " + score + " of " + arrQuestions.length + "<br />Well done! You're a real Terminator!<br />Do you want to play again?");
                                 } else {
                                     quiz.ui.loadSound("#discipline", 1000);
                                     $("body").removeClass("arnold");
